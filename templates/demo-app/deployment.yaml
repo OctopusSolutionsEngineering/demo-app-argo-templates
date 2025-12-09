@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{Octopus.Project.Slug}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: #{Octopus.Project.Slug}-service
+  template:
+    metadata:
+      labels:
+        component: #{Octopus.Project.Slug}-service
+    spec:
+      containers:
+        - name: #{Octopus.Project.Slug}
+          image: octopussolutionsengineering/ghu-ach-router:25.11.24172038
+          ports:
+            - name: http-route
+              containerPort: 80
