@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: #{Octopus.Project.Slug}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: #{Octopus.Project.Slug}-service
+  template:
+    metadata:
+      labels:
+        component: #{Octopus.Project.Slug}-service
+    spec:
+      containers:
+        - name: #{Octopus.Project.Slug}
+          image: #{Project.Application.Image}
+          ports:
+            - name: http-route
+              containerPort: 80
+  strategy:
+    canary:
+      steps:
+      - setWeight: 30
+      - pause: {}
+      - setWeight: 60
+      - pause: {}
+      - setWeight: 100
