@@ -20,6 +20,6 @@ spec:
               containerPort: 80
           env:
             - name: DATABASE_SERVER
-              value: "#{Tenant.Database.Server}"
+              value: "#{Project.Database.Server}"
             - name: DATABASE_NAME
-              value: "#{Tenant.Database.Name}"
+              value: "#{Project.Database.Name}"
