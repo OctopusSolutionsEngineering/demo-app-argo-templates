@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         component: #{Octopus.Project.Slug}-service
+        release: #{Octopus.Release.Number}
     spec:
       containers:
         - name: #{Octopus.Project.Slug}
